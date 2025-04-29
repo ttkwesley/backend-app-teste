@@ -22,10 +22,9 @@ public class NotificacaoServiceImpl implements NotificacaoService {
 
     public void enviarNotificacao(String usuarioDestinoId, String mensagem) {
         CadastroUsuario usuario = (CadastroUsuario) this.cadastroUsuarioRepository.findByUsername(usuarioDestinoId);
-        String mensagemNotify = "Uma nova candidatura para a vaga: " + mensagem;
         Notificacao notificacao = new Notificacao();
         notificacao.setUsuarioDestino(usuario);
-        notificacao.setMensagem(mensagemNotify);
+        notificacao.setMensagem(mensagem);
         notificacao.setDataCriacao(LocalDateTime.now());
         notificacaoRepository.save(notificacao);
     }

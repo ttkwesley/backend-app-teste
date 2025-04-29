@@ -74,6 +74,10 @@ public class CandidaturaServiceImpl implements CandidaturaService {
         if(candidatura.getId() != null){
             candidatura.setFeedback(feedback);
             candidatura.setStatus(novoStatus);
+
+            Optional<CadastroUsuario> usuario = cadastroUsuarioRepository.findById(idUser);
+            notificacaoService.enviarNotificacao(usuario.get().getUsername(), "Voce recebeu um feedback");
+
             this.candidaturaRepository.save(candidatura);
             return candidatura;
         }
